@@ -38,6 +38,14 @@ const resources = [
         audience: ["Faculty", "Staff"],
         description: "Internal staff resource",
         url: "/employee-request"
+    },
+    {
+        id: 6,
+        title: "Student Parking Information",
+        category: "Campus Services",
+        audience: ["Students"],
+        description: "Parking permits and campus parking rules",
+        url: "/student-parking"
     }
 ]
 

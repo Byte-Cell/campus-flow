@@ -1,0 +1,21 @@
+function ResourceCard({ resource }) {
+    return (
+        <article className="resource-card">
+                    <h2>{resource.title}</h2>
+                    
+                    <p>{resource.description}</p>
+
+                    <p className="category">
+                        {resource.category}
+                    </p>
+
+                    <p className="audience">
+                        {resource.audience.join(" - ")}
+                    </p>
+
+                    <button>View Resource</button>
+        </article>
+    )
+}
+
+export default ResourceCard;
