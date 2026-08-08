@@ -32,6 +32,8 @@ Resource Card
   border-radius: 8px;
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .resource-card:hover {
@@ -68,7 +70,7 @@ Resource Card
 }
 
 .resource-card button {
-  margin-top: 1rem;
+  margin-top: auto;
   padding: 0.6rem 1rem;
   border: none;
   border-radius: 6px;
