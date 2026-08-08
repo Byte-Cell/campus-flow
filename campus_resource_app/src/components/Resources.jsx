@@ -34,7 +34,7 @@ function Resources({ searchTerm }) {
             <div className="category-filter">
                 {categories.map((category) => (
                     <button className={category === selectedCategory ? "active" : ""} key={category} onClick={() => setSelectedCategory(category)}>
-                        {category}
+                        {category === "all" ? "All" : category}
                     </button>
                 ))}
             </div>
