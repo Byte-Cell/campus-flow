@@ -1,13 +1,20 @@
 import resources from "../data/resources";
 import ResourceCard from "./ResourceCard";
+import { useState } from "react";
 
 function Resources({ searchTerm }) {
+    const [selectedCategory, setSelectedCategory] = useState("all");
+
     function isMatch(resource) {
+        const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+
         if (
-            resource.title
+            (searchTerm === "" || resource.title
                 .trim()
                 .toLowerCase()
-                .includes(searchTerm.toLowerCase().trim())
+                .includes(normalizedSearchTerm))
+            && 
+            (selectedCategory === "all" || resource.category === selectedCategory)
         ) {
             return true;
         } else {
@@ -15,15 +22,25 @@ function Resources({ searchTerm }) {
         }
     }
 
-    const filteredResources =
-        searchTerm == "" ? resources : resources.filter(isMatch);
+    const filteredResources = resources.filter(isMatch);
+
+    const categories = [...new Set(resources.map((resource) => resource.category))];
+    categories.unshift("all");
 
     return (
         <section className="resources">
             <h2>Explore Campus Resources</h2>
 
+            <div className="category-filter">
+                {categories.map((category) => (
+                    <button className={category === selectedCategory ? "active" : ""} key={category} onClick={() => setSelectedCategory(category)}>
+                        {category}
+                    </button>
+                ))}
+            </div>
+
             <div className="resource-grid">
-                {searchTerm && filteredResources.length === 0 ? (
+                {filteredResources.length === 0 ? (
                     <article className="no-results">
                         <h3>No results found</h3>
                         <p>

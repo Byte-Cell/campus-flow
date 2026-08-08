@@ -12,7 +12,7 @@ const resources = [
         title: "Library Database Access",
         category: "Library",
         audience: ["Students", "Faculty"],
-        description: "resource",
+        description: "Access online library databases, journals, and academic research resources.",
         url: "/library-access"
     },
     {
@@ -20,7 +20,7 @@ const resources = [
         title: "Campus Tour Information",
         category: "Admissions",
         audience: ["Visitors"],
-        description: "Public facing resource",
+        description: "Information about campus tours, visitor services, and admissions resources.",
         url : "/campus-guide"
     },
     {
@@ -28,7 +28,7 @@ const resources = [
         title: "Academic Advising Resources",
         category: "Academic Resources",
         audience: ["Students"],
-        description: "Student support",
+        description: "Guidance and support resources for academic planning and student success.",
         url: "/advising"
     },
     {
@@ -36,7 +36,7 @@ const resources = [
         title: "Employee Software Request Form",
         category: "IT Services",
         audience: ["Faculty", "Staff"],
-        description: "Internal staff resource",
+        description: "Submit requests for approved software and technology needed for university work.",
         url: "/employee-request"
     },
     {
@@ -44,7 +44,7 @@ const resources = [
         title: "Student Parking Information",
         category: "Campus Services",
         audience: ["Students"],
-        description: "Parking permits and campus parking rules",
+        description: "Information about parking permits, regulations, and available campus parking.",
         url: "/student-parking"
     }
 ]
