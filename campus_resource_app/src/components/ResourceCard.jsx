@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function ResourceCard({ resource }) {
     return (
         <article className="resource-card">
@@ -15,7 +17,7 @@ function ResourceCard({ resource }) {
                 </p>
             </div>
 
-                    <button>View Resource</button>
+                    <Link to={resource.url}>View Resource</Link>
         </article>
     )
 }

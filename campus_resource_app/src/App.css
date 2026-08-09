@@ -20,6 +20,14 @@
   .resource-grid {
     grid-template-columns: 1fr;
   }
+
+  .resource-page {
+    padding: 2rem 1rem;
+  }
+
+  .resource-page h1 {
+    font-size: 2rem;
+  }
 }
 
 /*--------------
@@ -70,7 +78,7 @@ Resource Card
   color: #6b7280;
 }
 
-.resource-card button {
+.resource-card a {
   margin-top: auto;
   padding: 0.6rem 1rem;
   border: none;
@@ -79,14 +87,40 @@ Resource Card
   color: white;
   font-weight: 600;
   cursor: pointer;
+  align-self: flex-start;
+  text-decoration: none;
 }
 
-.resource-card button:hover {
+.resource-card a:hover {
   background-color: #1e40af;
 }
 
-.resource-content {
+.resource-page .resource-content {
   flex: 1;
+  margin-top: 2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: #f8fafc;
+  padding: 1.5rem;
+}
+
+.resource-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.resource-content ol {
+  padding-left: 1.5rem;
+}
+
+.resource-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  padding-left: 0.25rem;
+}
+
+.resource-content li::marker {
+  font-weight: 600;
 }
 
 .no-results {
@@ -126,4 +160,52 @@ Resource Card
 .category-filter button.active {
   background-color: #1d4ed8;
   color: white;
+}
+
+.resource-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.resource-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.resource-page .category {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+}
+
+.resource-page p {
+  margin-bottom: 1rem;
+}
+
+.resource-page .audience {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.resource-page > a {
+  display: inline-block;
+  margin-top: 2rem;
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.resource-page > a:hover {
+  text-decoration: underline;
+}
+
+.resource-page .description {
+  font-size: 1.05rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin-bottom: 1rem;
 }
