@@ -2,18 +2,34 @@ import resources from "../data/resources";
 import ResourceCard from "./ResourceCard";
 import { useState } from "react";
 
-function Resources({ searchTerm }) {
+function Resources({ searchTerm, setSearchTerm }) {
     const [selectedCategory, setSelectedCategory] = useState("all");
+
+    function clearFilters() {
+        setSearchTerm("");
+        setSelectedCategory("all");
+    }
 
     function isMatch(resource) {
         const normalizedSearchTerm = searchTerm.trim().toLowerCase();
 
         if (
-            (searchTerm === "" || resource.title
+            (searchTerm === "" || 
+            resource.title 
                 .trim()
                 .toLowerCase()
-                .includes(normalizedSearchTerm))
-            && 
+                .includes(normalizedSearchTerm) ||
+            resource.description
+                .trim()
+                .toLowerCase()
+                .includes(normalizedSearchTerm) ||
+            resource.category
+                .trim()
+                .toLowerCase()
+                .includes(normalizedSearchTerm) ||
+            resource.audience.some((person) => 
+                person.toLowerCase().includes(normalizedSearchTerm))
+           ) && 
             (selectedCategory === "all" || resource.category === selectedCategory)
         ) {
             return true;
@@ -38,6 +54,12 @@ function Resources({ searchTerm }) {
                     </button>
                 ))}
             </div>
+
+            {(searchTerm !== "" || selectedCategory !== "all") && (
+                <button className="clear-filters" onClick={clearFilters}>
+                    Clear Filters
+                </button>
+            )}
 
             <div className="resource-grid">
                 {filteredResources.length === 0 ? (

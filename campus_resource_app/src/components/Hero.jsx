@@ -10,7 +10,7 @@ function Hero({ searchTerm, setSearchTerm }) {
             </p>
             <div className="search-container">
                 <label htmlFor="site-search">Search: </label>
-                <input type="search" id="site-search" name="q" placeholder="Search campus resources..." onChange={(e) => setSearchTerm(e.target.value)}/>
+                <input type="search" id="site-search" name="q" placeholder="Search campus resources..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}/>
                 <button>Search</button>
             </div>
         </section>

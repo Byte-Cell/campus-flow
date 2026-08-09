@@ -50,7 +50,7 @@ function App() {
               </section>
 
               <section>
-                <Resources searchTerm={searchTerm} />
+                <Resources searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               </section>
             </main>
           } />

@@ -209,3 +209,19 @@ Resource Card
   line-height: 1.7;
   margin-bottom: 1rem;
 }
+
+.clear-filters {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background-color: white;
+  color: #4b5563;
+  cursor: pointer;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.clear-filters:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
