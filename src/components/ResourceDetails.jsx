@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function ResourcePage({ resource }) {
+function ResourceDetails({ resource }) {
     return (
         <article className="resource-page">
             <h1>{resource.title}</h1>
@@ -23,11 +23,11 @@ function ResourcePage({ resource }) {
                 </ol>
             </section>
 
-            <Link to="/">
+            <Link to="/resources">
                 Back to Resources
             </Link>
         </article>
     );
 }
 
-export default ResourcePage;
+export default ResourceDetails;
