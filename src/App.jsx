@@ -4,7 +4,8 @@ import {
     Link,
     Route,
     Routes,
-    useLocation
+    useLocation,
+    useParams,
 } from "react-router-dom";
 
 import About from "./components/About";
@@ -17,29 +18,58 @@ import ResourcesView from "./components/ResourcesView";
 
 import "./App.css";
 
-function ResourceRoute({ resources }) {
-    const location = useLocation();
+function ResourceRoute() {
+    const { id } = useParams();
 
-    const resource = resources.find(
-        (resource) => resource.url === location.pathname
-    );
+    const [resource, setResource] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-    return resource ? (
-        <ResourceDetails resource={resource} />
-    ) : (
-        <section className="resource-not-found">
-            <h1>Resource Not Found</h1>
+    useEffect(() => {
+        fetch(`/api/resources/${id}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Resource not found");
+                }
 
-            <p>
-                We couldn't find the resource you're looking for. It may have
-                been moved or the link may be incorrect.
-            </p>
+                return response.json();
+            })
+            .then((data) => {
+                setResource(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setError("Resource not found.");
+                setLoading(false);
+            });
+    }, [id]);
 
-            <Link to="/">
-                Back to Resources
-            </Link>
-        </section>
-    );
+    if (loading) {
+        return (
+            <section className="resource-not-found">
+                <h1>Loading Resource...</h1>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="resource-not-found">
+                <h1>Resource Not Found</h1>
+
+                <p>
+                    We couldn't find the resource you're looking for.
+                </p>
+
+                <Link to="/resources">
+                    Back to Resources
+                </Link>
+            </section>
+        );
+    }
+
+    return <ResourceDetails resource={resource} />;
 }
 
 function SearchReset({ setSearchTerm }) {
@@ -107,6 +137,11 @@ function App() {
                     />
 
                     <Route
+                        path="/resources/:id"
+                        element={<ResourceRoute />}
+                    />
+
+                    <Route
                         path="/categories"
                         element={<Categories resources={resources} />}
                     />
@@ -114,11 +149,6 @@ function App() {
                     <Route
                         path="/about"
                         element={<About />}
-                    />
-
-                    <Route
-                        path="*"
-                        element={<ResourceRoute resources={resources} />}
                     />
                 </Routes>
 

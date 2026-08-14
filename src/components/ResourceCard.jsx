@@ -17,7 +17,7 @@ function ResourceCard({ resource }) {
                 </p>
             </div>
 
-            <Link to={resource.url}>
+            <Link to={`/resources/${resource.id}`}>
                 View Resource
             </Link>
         </article>
