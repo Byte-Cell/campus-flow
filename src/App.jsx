@@ -8,6 +8,8 @@ import {
     useParams,
 } from "react-router-dom";
 
+import { getResource, getResources } from "./api/resources";
+
 import About from "./components/About";
 import Categories from "./components/Categories";
 import Footer from "./components/Footer";
@@ -26,21 +28,14 @@ function ResourceRoute() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        fetch(`/api/resources/${id}`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Resource not found");
-                }
-
-                return response.json();
-            })
+        getResource(id)
             .then((data) => {
                 setResource(data);
                 setLoading(false);
             })
             .catch((error) => {
                 console.error(error);
-                setError("Resource not found.");
+                setError("Resource not found");
                 setLoading(false);
             });
     }, [id]);
@@ -91,14 +86,7 @@ function App() {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        fetch("/api/resources")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Failed to fetch resources");
-                }
-
-                return response.json();
-            })
+        getResources()
             .then((data) => {
                 setResources(data);
                 setLoading(false);
@@ -144,7 +132,7 @@ function App() {
                     <Route
                         path="/categories"
                         element={
-                            <Categories 
+                            <Categories
                                 resources={resources}
                                 loading={loading}
                                 error={error}
