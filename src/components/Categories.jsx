@@ -1,6 +1,24 @@
 import { Link } from "react-router-dom";
 
-function Categories({ resources }) {
+function Categories({ resources, loading, error }) {
+    if (loading) {
+        return (
+            <main className="categories-page">
+                <h1>Browse Catgories</h1>
+                <p>Loading categories...</p>
+            </main>
+        );
+    }
+
+    if (error) {
+        return (
+            <main className="categories-page">
+                <h1>Browse Categories</h1>
+                <p>{error}</p>
+            </main>
+        );
+    }
+    
     const categories = [
         ...new Set(resources.map((resource) => resource.category))
     ];

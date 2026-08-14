@@ -143,7 +143,13 @@ function App() {
 
                     <Route
                         path="/categories"
-                        element={<Categories resources={resources} />}
+                        element={
+                            <Categories 
+                                resources={resources}
+                                loading={loading}
+                                error={error}
+                            />
+                        }
                     />
 
                     <Route
