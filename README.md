@@ -1,16 +1,65 @@
-# React + Vite
+# Campus Flow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Campus Flow is a full-stack campus resource directory that helps students, faculty, staff, and visitors find university information in one place.
 
-Currently, two official plugins are available:
+The application provides searchable campus resources, category filtering, individual resource pages, and a REST API backed by PostgreSQL.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Browse campus resources
+- Search resources by title, description, category, and audience
+- Filter resources by category
+- View individual resource details
+- REST API for resource management
+- Create, read, update, and delete resources
+- PostgreSQL database integration
+- Loading and error states
+- Request validation
+- Resource ID validation
+- Security headers with Helmet
+- JSON request-size limiting
+- Environment-based database configuration
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- React Router
+- Vite
+- JavaScript
+- CSS
+
+### Backend
+
+- Node.js
+- Express
+- PostgreSQL
+- `pg`
+- Helmet
+- dotenv
+
+## Project Structure
+
+```text
+campus-flow/
+├── backend/
+│   ├── db/
+│   │   └── database.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
+│
+├── src/
+│   ├── api/
+│   │   └── resources.js
+│   ├── components/
+│   ├── App.jsx
+│   ├── App.css
+│   └── main.jsx
+│
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── vite.config.js
+└── README.md
