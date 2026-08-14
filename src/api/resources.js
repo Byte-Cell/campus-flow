@@ -1,5 +1,7 @@
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 export async function getResources() {
-    const response = await fetch("/api/resources");
+    const response = await fetch(`${API_URL}/api/resources`);
 
     if (!response.ok) {
         throw new Error("Failed to fetch resources");
@@ -9,7 +11,7 @@ export async function getResources() {
 }
 
 export async function getResource(id) {
-    const response = await fetch(`/api/resources/${id}`);
+    const response = await fetch(`${API_URL}/api/resources/${id}`);
 
     if (!response.ok) {
         throw new Error("Resource not found");
@@ -19,7 +21,7 @@ export async function getResource(id) {
 }
 
 export async function createResource(resource) {
-    const response = await fetch("/api/resources", {
+    const response = await fetch(`${API_URL}/api/resources`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -35,7 +37,7 @@ export async function createResource(resource) {
 }
 
 export async function updateResource(id, resource) {
-    const response = await fetch(`/api/resources/${id}`, {
+    const response = await fetch(`${API_URL}/api/resources/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -51,7 +53,7 @@ export async function updateResource(id, resource) {
 }
 
 export async function deleteResource(id) {
-    const response = await fetch(`/api/resources/${id}`, {
+    const response = await fetch(`${API_URL}/api/resources/${id}`, {
         method: "DELETE",
     });
 
