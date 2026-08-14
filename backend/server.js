@@ -12,6 +12,12 @@ function isValidId(id) {
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
 
+app.get("/health", (req, res) => {
+    res.json({
+        status: "ok",
+    });
+});
+
 app.get("/api/resources", async (req, res) => {
     try {
         const result = await pool.query(
