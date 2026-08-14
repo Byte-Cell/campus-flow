@@ -1,10 +1,16 @@
 import express from "express";
 import pool from "./db/database.js";
+import helmet from "helmet";
 
 const app = express();
 const PORT = 5000;
 
-app.use(express.json());
+function isValidId(id) {
+    return Number.isInteger(Number(id)) && Number(id) > 0;
+}
+
+app.use(helmet());
+app.use(express.json({ limit: "10kb" }));
 
 app.get("/api/resources", async (req, res) => {
     try {
@@ -24,6 +30,12 @@ app.get("/api/resources", async (req, res) => {
 
 app.get("/api/resources/:id", async (req, res) => {
     try {
+        if (!isValidId(req.params.id)) {
+            return res.status(400).json({
+                error: "Resource ID must be a positive integer",
+            });
+        }
+
         const result = await pool.query(
             "SELECT * FROM resources WHERE id = $1",
             [req.params.id]
@@ -90,6 +102,12 @@ app.post("/api/resources", async (req, res) => {
 
 app.put("/api/resources/:id", async (req, res) => {
     try {
+        if (!isValidId(req.params.id)) {
+            return res.status(400).json({
+                error: "Resource ID must be a positive integer",
+            });
+        }
+
         const {
             title,
             category,
@@ -145,6 +163,12 @@ app.put("/api/resources/:id", async (req, res) => {
 
 app.delete("/api/resources/:id", async (req, res) => {
     try {
+        if (!isValidId(req.params.id)) {
+            return res.status(400).json({
+                error: "Resource ID must be a positive integer",
+            });
+        }
+        
         const result = await pool.query(
             "DELETE FROM resources WHERE id = $1 RETURNING *",
             [req.params.id]
