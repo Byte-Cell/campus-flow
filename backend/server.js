@@ -3,7 +3,7 @@ import pool from "./db/database.js";
 import helmet from "helmet";
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 function isValidId(id) {
     return Number.isInteger(Number(id)) && Number(id) > 0;
