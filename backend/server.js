@@ -1,33 +1,25 @@
 import express from "express";
-import resources from "./data/resources.js";
+import pool from "./db/database.js";
 
 const app = express();
 const PORT = 5000;
 
-app.get("/", (req, res) => {
-    res.json({
-        message: "Campus Flow API is running."
-    });
-});
+app.get("/api/resources", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT * FROM resources ORDER BY id"
+        );
 
-app.get("/api/resources", (req, res) => {
-    res.json(resources);
-});
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
 
-app.get("/api/resources/:id", (req, res) => {
-    const resource = resources.find(
-        (resource) => resource.id === Number(req.params.id)
-    );
-
-    if (!resource) {
-        return res.status(404).json({
-            message: "Resource not found",
+        res.status(500).json({
+            error: "Failed to fetch resources",
         });
     }
-
-    res.json(resource);
 });
 
 app.listen(PORT, () => {
-    console.log(`Campus Flow API running on port ${PORT}`);
+    console.log(`Server running on http://localhost:${PORT}`);
 });
