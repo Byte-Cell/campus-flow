@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import resources from "../data/resources";
 
-function Categories() {
+function Categories({ resources }) {
     const categories = [
         ...new Set(resources.map((resource) => resource.category))
     ];

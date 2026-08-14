@@ -1,12 +1,15 @@
 import ResourceDirectory from "./ResourceDirectory";
 
-function ResourcesView({ searchTerm, setSearchTerm }) {
+function ResourcesView({ resources, searchTerm, setSearchTerm, loading, error }) {
     return (
         <main>
             <section>
                 <ResourceDirectory
+                    resources={resources}
                     searchTerm={searchTerm}
                     setSearchTerm={setSearchTerm}
+                    loading={loading}
+                    error={error}
                 />
             </section>
         </main>

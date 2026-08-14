@@ -15,10 +15,9 @@ import Navbar from "./components/Navbar";
 import ResourceDetails from "./components/ResourceDetails";
 import ResourcesView from "./components/ResourcesView";
 
-import resources from "./data/resources";
 import "./App.css";
 
-function ResourceRoute() {
+function ResourceRoute({ resources }) {
     const location = useLocation();
 
     const resource = resources.find(
@@ -57,6 +56,29 @@ function SearchReset({ setSearchTerm }) {
 
 function App() {
     const [searchTerm, setSearchTerm] = useState("");
+    const [resources, setResources] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        fetch("/api/resources")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch resources");
+                }
+
+                return response.json();
+            })
+            .then((data) => {
+                setResources(data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error(error);
+                setError("Unable to load resources.");
+                setLoading(false);
+            });
+    }, []);
 
     return (
         <BrowserRouter>
@@ -75,15 +97,18 @@ function App() {
                         path="/resources"
                         element={
                             <ResourcesView
+                                resources={resources}
                                 searchTerm={searchTerm}
                                 setSearchTerm={setSearchTerm}
+                                loading={loading}
+                                error={error}
                             />
                         }
                     />
 
                     <Route
                         path="/categories"
-                        element={<Categories />}
+                        element={<Categories resources={resources} />}
                     />
 
                     <Route
@@ -93,7 +118,7 @@ function App() {
 
                     <Route
                         path="*"
-                        element={<ResourceRoute />}
+                        element={<ResourceRoute resources={resources} />}
                     />
                 </Routes>
 

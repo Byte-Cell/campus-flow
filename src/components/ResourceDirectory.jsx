@@ -1,12 +1,29 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import resources from "../data/resources";
 import ResourceCard from "./ResourceCard";
 
-function ResourceDirectory({ searchTerm, setSearchTerm }) {
+function ResourceDirectory({ resources, searchTerm, setSearchTerm, loading, error }) {
     const [selectedCategory, setSelectedCategory] = useState("all");
     const [searchParams] = useSearchParams();
 
+    if (loading) {
+        return (
+            <section className="resources">
+                <h2>Explore Campus Resources</h2>
+                <p>Loading resources...</p>
+            </section>
+        );
+    }
+
+    if (error) {
+        return (
+            <section className="resources">
+                <h2>Explore Campus Resources</h2>
+                <p>{error}</p>
+            </section>
+        );
+    }
+    
     useEffect(() => {
         const categoryFromUrl = searchParams.get("category");
 
