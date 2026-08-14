@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 function ResourceDetails({ resource }) {
+    const audience = resource.audience || [];
+    const content = resource.content || [];
+    
     return (
         <article className="resource-page">
             <h1>{resource.title}</h1>
