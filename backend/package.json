@@ -7,6 +7,7 @@
     "dev": "node server.js",
     "start": "node server.js",
     "init-db": "node db/init.js",
+    "seed-db": "node dn/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
