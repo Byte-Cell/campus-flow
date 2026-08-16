@@ -12,7 +12,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const schemaPath = path.join(__dirname, "schema.sql");
-const schema = fs.readFileSync(schemaPath, "utf8");
+const schema = fs.readFileSync(schemaPath, "utf8")
+    .split("\n")
+    .filter((line) => !line.trim().startsWith("\\"))
+    .join("\n");
 
 const client = new Client({
     host: process.env.DB_HOST,
