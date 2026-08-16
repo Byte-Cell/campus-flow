@@ -87,11 +87,10 @@ try {
     for (const resource of rows) {
         await client.query(
             `INSERT INTO resources
-                (id, title, category, description, audience, url, content)
-             VALUES
-                ($1, $2, $3, $4, $5, $6, $7)`,
+                (title, category, description, audience, url, content)
+            VALUES
+                ($1, $2, $3, $4, $5, $6)`,
             [
-                resource.id,
                 resource.title,
                 resource.category,
                 resource.description,
@@ -101,14 +100,6 @@ try {
             ]
         );
     }
-
-    await client.query(
-        `SELECT setval(
-            'public.resources_id_seq',
-            (SELECT MAX(id) FROM resources),
-            true
-        )`
-    );
 
     console.log(`Successfully seeded ${rows.length} resources.`);
 } catch (error) {
